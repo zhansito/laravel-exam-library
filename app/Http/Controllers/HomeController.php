@@ -11,8 +11,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $items = Item::where('status', 1)
-                ->oredrBy('created_at', 'DESC')
+        $recently_added_items = Item::where('status', 1)
+                ->orderBy('created_at', 'DESC')
                 ->limit(7)
                 ->get();
 
@@ -21,6 +21,8 @@ class HomeController extends Controller
                         ->groupBy('item_id')
                         ->orderBy('views_count', 'DESC')
                         ->get();
+
+        
 
         return view('pages.home', compact('recently_added_items', 'popular_items'));
     }

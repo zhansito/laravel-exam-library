@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Items\Review;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,6 +12,11 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected $age;
+    protected $basket_item_count = 0;
+
+    protected $appends = ['age', 'basket_items_count'];
 
     /**
      * The attributes that are mass assignable.
@@ -58,7 +64,7 @@ class User extends Authenticatable
 
     public function favourite_items()
     {
-        return $this->belongsToMany(Item::class, 'likes', 'usr_id', 'id', 'id');
+        return $this->belongsToMany(Item::class, 'likes', 'user_id', 'id', 'id');
     }
 
     public function basket_items()

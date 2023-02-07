@@ -21,7 +21,7 @@
             <div class="w-1/2">
                 <h1 class="text-2xl font-semibod p-4">Book on shelf</h1>
                 <section class="flex flex-wrap w-full justify-start items-center">
-                    @foreach(auth()->user()->basket_items as $item)
+                    @foreach(auth()->user()->items as $item)
                         <div class="bg-gray-100 flex flex-col justify-end m-2" style="height: 240px; width: 180px; background-image: url('{{ $item->photo_url }}'); background-position: center">
                             <div class="p-2 bg-gray-700 text-white font-semibold">
                                 <a href="{{ route('items.show', ['id'=>$item->id]) }}" class="hover: text-blue-300">{{ $item->title }}</a>

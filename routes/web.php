@@ -18,12 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/', function () { 
-    $items = Item::all();
-    return view('pages.home', compact('items'));
-})->name('home');
+// Route::get('/', function () { 
+//     $items = Item::all();
+//     return view('pages.home', compact('items'));
+// })->name('home');
 
 Route::get('/about', function () {
     return view('pages.info.about');
@@ -65,6 +65,8 @@ Route::prefix('/items')->name('items.')->group(function()
         Route::post('/{id}/dislike', [ItemController::class, 'dislike'])->name('dislike');
         Route::post('/{id}/add_to_basket', [ItemController::class, 'add_to_basket'])->name('add_to_basket');
         Route::post('/{id}/remove_from_basket', [ItemController::class, 'remove_from_basket'])->name('remove_from_basket');
+        Route::post('/{id}/add_to_shelf', [ItemController::class, 'add_to_shelf'])->name('add_to_shelf');
+        Route::post('/{id}/remove_from_shelf', [ItemController::class, 'remove_from_shelf'])->name('remove_from_shelf');
         
         Route::post('/{id}/attach/tag', [ItemController::class, 'attach_tag'])->name('attach_tag');
         Route::post('/{id}/detacg/tag', [ItemController::class, 'detach_tag'])->name('detach_tag');
