@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Facade\FlareClient\View;
+use App\Models\Items\{ Like, View, Review };
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Psy\CodeCleaner\UseStatementPass;
@@ -15,8 +15,10 @@ class Item extends Model
 
     protected $is_liked = false;
     protected $in_basket = 0;
+    protected $views_count = 0;
+    protected $avg_rating = 0;
 
-    protected $appends = ['is_liked', 'in_basket'];
+    protected $appends = ['is_liked', 'in_basket', 'views_count', 'avg_rating'];
 
     public function user()
     {
@@ -35,7 +37,7 @@ class Item extends Model
 
     public function likes()
     {
-        return $this->hasMany(View::class);
+        return $this->hasMany(Like::class);
     }
 
     
@@ -44,7 +46,7 @@ class Item extends Model
         return $this->hasMany(View::class);
     }
     
-    public function review()
+    public function reviews()
     {
         return $this->hasMany(Review::class);
     }

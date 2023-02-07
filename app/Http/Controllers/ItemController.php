@@ -68,6 +68,7 @@ class ItemController extends Controller
                     ->with('reviews')
                     ->findOrFail($id);
 
+
         if(auth()->user())
         {
             $user = auth()->user();
@@ -221,6 +222,44 @@ class ItemController extends Controller
                 {
                     $item->users()->detach($user->id);
                 }
+            }
+
+            return back();
+    }
+
+    // public function add_to_shelf($id)
+    // {
+    //         $item = Item::findOrFail($id);
+    //         $user = auth()->user();
+            
+    //         // $item->user_id = '';
+    //         // $item->save();
+            
+
+    //         if($user && $item)
+    //         {
+    //                 //$item->users()->detach($user->id);
+    //                 $item->user()->associate($user);
+    //                 $item->save();
+    //         }
+
+    //         return back();
+    // }
+
+    public function remove_from_shelf($id)
+    {
+            $item = Item::findOrFail($id);
+            $user = auth()->user();
+            
+            // $item->user_id = '';
+            // $item->save();
+            
+
+            if($user && $item)
+            {
+                    //$item->users()->detach($user->id);
+                    $item->user()->dissociate($user);
+                    $item->save();
             }
 
             return back();
